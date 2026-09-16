@@ -1,0 +1,20 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Proxy Anthropic API calls to avoid CORS issues and keep API key server-side
+[[redirects]]
+  from = "/api/claude"
+  to = "https://api.anthropic.com/v1/messages"
+  status = 200
+  force = true
+  [redirects.headers]
+    Access-Control-Allow-Origin = "*"
+
+[build.environment]
+  NODE_VERSION = "20"
